@@ -1,0 +1,44 @@
+# contents
+nav:
+  - Home:
+      - インデックス: index.md
+      - ほげ: hoge.md
+        
+
+nav:
+  - 'Home': index.md
+  - Satellite:
+    - 'はじめに': Satellite/index.md
+    - 'コンセプト': Satellite/concept.md
+    - 'Reference':
+      - 'Communication': Satellite/Reference/SoemAndDevice.md
+
+# metadata
+site_name: ドキドキドキュメント（題名求む）
+docs_dir: docs
+use_directory_urls: false
+  
+site_url: https://cognitoin.pages.robotech.t.u-tokyo.ac.jp/Control/cognition-docs
+repo_url: https://git.robotech.t.u-tokyo.ac.jp/Control/cognition-docs
+
+theme:
+  name: readthedocs 
+  language: ja
+  palette:
+    scheme: slate 
+  features:
+    - content.code.annotate
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+
+    
+extra:
+  search:
+    language: 'jp'
+
+

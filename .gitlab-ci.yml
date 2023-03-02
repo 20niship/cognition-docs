@@ -1,0 +1,35 @@
+image: python:latest
+stages:
+    - build
+    - release
+before_script:
+  - pip install --upgrade pip
+  - pip install mkdocs
+  - pip install mkdocs-material
+    pip install pymdown-extensions 
+  - pip install pygments
+  - pip install mkdocs-include-markdown-plugin
+build:
+  stage: build
+  before_script:
+  script:
+    - mkdocs build
+  artifacts:
+      paths:
+          - site/
+      expire_in: 10 min
+  tags:
+    - default
+pages:
+  stage: release
+  script:
+    - pip install mkdocs-material
+    - mkdocs build --site-dir public
+  artifacts:
+    paths:
+    - public/
+  only:
+  - master
+  tags:
+    - default
+
