@@ -1,4 +1,8 @@
 *.swp
 .vscode
-.vscode
+.vs
+venv
+site/
+.python-version
+.DS_Store
 
