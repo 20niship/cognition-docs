@@ -1,13 +1,4 @@
 # contents
-nav:
-  - Home:
-      - インデックス: index.md
-      - ほげ: hoge.md
-  - Satellite:
-    - 'はじめに': Satellite/index.md
-    - 'コンセプト': Satellite/concept.md
-    - 'Reference':
-      - 'Communication': Satellite/Reference/SoemAndDevice.md
 
 # metadata
 site_name: 認識（とか）ドキュメント（題名求む）
