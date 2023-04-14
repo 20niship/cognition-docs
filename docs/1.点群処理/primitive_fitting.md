@@ -87,7 +87,8 @@ int main(){
 ```
 
 ## 配管
-
+- https://stackoverflow.com/questions/64911820/fit-curve-spline-to-3d-point-cloud
+  -  ![](https://i.stack.imgur.com/WiwdV.png)
 
 ## 平面
 

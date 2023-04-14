@@ -24,6 +24,7 @@ pages:
   artifacts:
     paths:
     - public/
+    - media/
   only:
   - master
   tags:

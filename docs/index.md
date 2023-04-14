@@ -1,6 +1,16 @@
-# MovUtl MkDocs
+# 認識・経路探索・C++ドキュメント
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+- 以下のような内容を含んでいます：
+  - 点群処理 : センサ類の基礎知識からセグメンテーション、フィッティングまで。ちょっと機械学習
+  - 画像処理：いろいろ
+  - 経路探索：RRT, MPC, 車両モデル
+  - Computer Graphics：基礎知識と数学とOpenGLやVulkanについて、GLSLシェーダ芸とレイキャスティング
+  - アーキテクチャ・デザイン
+  - アルゴリズム：８分岐、最近某探索、凸法検出などの点群処理に必要な処理、実装
+  - C++ Tips
+    - 並列計算：GPUやCPUのマルチスレッドを使って並列計算する方法
+    - C++のプロジェクトを作るときに最低限する必要があること
+    - プログラムの処理速度の上げ方
 
 ## Commands
 
@@ -28,15 +38,9 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 !!! Danger
     これは危険です。
 
-!!! Success
-    これは成功です。
 
-!!! Failure
-    これは失敗です。
+-------------画像テスト---------
 
-!!! Bug
-    これはバグです。
+<!--![](media/hanekawa.png) -->
 
-!!! summary
-    これは概要です。
-
+-------------画像テスト終わり---------
