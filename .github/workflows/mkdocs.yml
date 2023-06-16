@@ -18,7 +18,4 @@ jobs:
         run: |
            mkdocs build --verbose --clean
       - name: mkdocs deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-           github_token: ${{ secrets.PERSONAL_TOKEN }}
-           publish_dir: site
+        run: mkdocs gh-deploy --force
