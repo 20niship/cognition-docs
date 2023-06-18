@@ -18,6 +18,9 @@ concurrency:
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout branch 
@@ -31,7 +34,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: mkdocs build
-        run: |
-           mkdocs build --verbose --clean
-      - name: mkdocs deploy
-        run: mkdocs gh-deploy --force
+        run: mkdocs build --clean
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
