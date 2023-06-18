@@ -18,7 +18,7 @@
 *   公式ページを参照
 *   Gold Solo Twitter G-SOLTWIR50/100SE1
     *   [https://www.elmomc.com/products/gold-solo-twitter-servo-drive.htm](https://www.elmomc.com/products/gold-solo-twitter-servo-drive.htm)
-    - ![](/img/maestro/g_soltwi_spec.png)
+    - ![](img/maestro/g_soltwi_spec.png)
     *   10A以下のモデルはPhoenix Connector, 10A以上はWire connections
     *   PLC Sourceは12-30V。G-SOLTWIR50/100SE1はSTOがPLC Sourceなので、この電圧を印加できるシステムにする必要がある
     *   Analog InputはDifferential(±10V) or Single ended(0-3V)と書いてあるが、両方同時に入力可能
@@ -141,15 +141,6 @@
 *   Elmoモータドライバとの通信はCANOpenと呼ばれるプロトコルに基づくCAN通信によって行われる。CANOpenはオブジェクトディクショナリと呼ばれるデータセットを各デバイスが持ち、それを通信によって読み書きすることで指令やセンサ読み取りを行うのが特徴。
 *   以下がわかりやすい
     *   [http://www.softech.co.jp/mm_130904_plc.htm](http://www.softech.co.jp/mm_130904_plc.htm)
-
-
-
-#### ライブラリ
-*   森が製作したCのライブラリとC++のサンプルが以下。整備はしていないので使いやすくはないと思うが。
-    *   [http://svc/gitbucket/s-mori/libcoelmo](http://svc/gitbucket/s-mori/libcoelmo)
-    *   [http://svc/gitbucket/s-mori/libcoelmo_xenomai_sample](http://svc/gitbucket/s-mori/libcoelmo_xenomai_sample)
-
-
 
 #### BeagleBoneBlackの準備
 *   カーネルのバージョンが低いとできないかもしれない。以下はLinux beaglebone 4.4.68-ti-xenomai-r108で確認。
@@ -311,7 +302,7 @@ root@beaglebone: ~/CANopenSocket/canopencomm# cansend can0 080#
         -  Workspace -> \[P01(指定したmaestroのID)\]を右クリック -> \[Add NewPlatinum Maestro\] -> 画面中央付近の\[Target Connection/Connection Type\]をofflineから変更
 *   電流制御する場合には，MaestroからElmoに電流命令を飛ばせるようにする必要がある（デフォルトではオフ）ので，その設定．
     -  Workspace -> \[P01(指定したmaestroのID)\]を右クリック -> \[Edit EtherCAT configuration\] -> axisを選択(a01(Twitter)とか) -> FMMU/SM -> SM2(output)から\[0X160C Target Torque\]を追加
-    - ![](/img/maestro/add_torque_control_option.PNG)
+    - ![](img/maestro/add_torque_control_option.PNG)
 
 
 #### IPアドレス（とサブマスク）の変更
@@ -394,7 +385,7 @@ Tips
 *   cui上で操作したいなら，telnetでログイン可能．usename, passwordともにuserで入れる
     `$ telnet 192.168.2.### `
 *   例はこんなかんじ．
-  - ![](/img/maestro/telnet_example.JPG)
+  - ![](img/maestro/telnet_example.JPG)
 
 
 ### マエストロでの開発
@@ -412,8 +403,8 @@ Tips
 ### PWMの周波数（電流サンプリングタイム）とチョークコイル
 *   参照：[https://www.maxongroup.co.jp/medias/sys_master/8815464153118.pdf?attachment=true](https://www.maxongroup.co.jp/medias/sys_master/8815464153118.pdf?attachment=true)
 *   症状：いかに記述するような電流制御不安定化，Quick Tuning時のGain error
-*   森さんの使われたものより一回り小さい\[G-SOLTWI 10/100EE7\]場合，デフォルトは100usとなっている．
-*   注意しすべき点として，アクチュエータとの相性が悪いと電流リップルが異常に大きくなり，制御が不安的になる．不安定の例は以下
+*   一回り小さい\[G-SOLTWI 10/100EE7\]場合，デフォルトは100usとなっている．
+*  注意しすべき点として，アクチュエータとの相性が悪いと電流リップルが異常に大きくなり，制御が不安的になる．不安定の例は以下
     *   Quick Tuning時に異常発熱．余裕で発煙する．普通に触れない．
     *   指令電流を全く追従しない．
     *   Expert Tuning -> Current verification -> step応答・周波数応答ともに完全に発振
@@ -477,30 +468,20 @@ Tips
     
 
 
-
-#### telnetからやる場合（できないかもー）
-*   [Elmoモータードライバ](http://is/pukiwiki/index.php?Elmo%A5%E2%A1%BC%A5%BF%A1%BC%A5%C9%A5%E9%A5%A4%A5%D0 "Elmoモータードライバ (1163d)")に示したように，ログインしてスクリプトを立ち上げてください
-    
-    ./remoteSecondGlove.pexe 0
-    
-
-
-
 #### メモ
 *   引数0はデバックで楽だったころの名残．入れてね．役割ないけど．
 *   うまくいった時　：　mastroの体内時計が10ms感覚で吐かれ続ける
 *   失敗したとき　：　なんか終了する．
 *   以下が出た場合（失敗時の一例）
 ```sh
-\-----------------------------------------
-----     Get Error\\Warning           ----
+-----------------------------------------
+----     Get Error/Warning           ----
 ----     From API function           ----
 -----------------------------------------
 Function name:  MMC_OpenUdpChannelCmd:
 Return value :  -1
 ErrorID      :  -16
 ```
-    
     *   マエストロ上でドライバに命令を送ったのに，それを終了させずに重複して命令を送ってますよ的なエラー
     *   これは現状以下の解決策で強制的にスクリプトを終わらせるしかない．
         *   マエストロのコンセントをぶちぬく
@@ -520,9 +501,7 @@ ErrorID      :  -16
     *   この3行目にあたる値域は，はグローブの取り付け方，あるいは原点出しのピンの位置によって使い分けている．注意
 *   また，ENC-USB-###_.csvをあえて読まない設定をしている場合も存在．
     *   Glvlib/MtGlb_R.cpp内の関数【init_ElmoEnc()】内に，以下の処理がある場合は注意．
-        
-        `Axisinterface_v2::reset_robotLoadEnc_and_robotMotorinptEnc(float v1, int v2);`
-        
+        * `Axisinterface_v2::reset_robotLoadEnc_and_robotMotorinptEnc(float v1, int v2);`
         *   Elmo　Driverが読み取った値は，通常maxon motorの入力軸に取り付けられたabsolute encoderの値
         *   これは，Elmo Driverの電源が落とされる度に（PCを再起動するたびに？）変わる．
         *   なので通常，トングのコードMtTgR.cppなど同様に，遠隔操縦のコードをhost PCから起動させた際には，まずelmoが獲得したモータ入力軸の値を読みに行き，これと出力軸エンコーダ（MAS3）の読み取った絶対値と対応させる．
@@ -532,9 +511,6 @@ ErrorID      :  -16
     *   この場合，対策方法は二つ
         *   1\. `reset_robotLoadEnc_and_robotMotorinptEnc(float v1, int v2);`をコメントアウトして，人差し指が閉じ切らないことを我慢して使う．
         *   2\. EASII => 【Maestro Setup and Motion】（画面左下） => 限界まで同型ハンドの人差し指の第二関節を閉じた時の，【a02】のActual position \[cnt\]をメモ．この値v2_を，その後，`reset_robotLoadEnc_and_robotMotorinptEnc(0.0, v2_)`とセットして，再度build
-
-
-
 
 
 ### 0\. Absolute Encoderの原点出し
@@ -553,10 +529,6 @@ make
     *   <Encoder ID> : チャネル番号に対応，CNが一番若いものが0（一号機のMAS-3-INTERFACEはCN3, 二号機はCN1）,
     *   <Direction> : 指の可動域が原点からpos方向なのかnega方向なのかを指定．要は0度から突然6piとか-6piに飛ばないようにするためのもの．わからなかったら，とりあえず0とかにして，0点d出しのピンに関節を当ててから， 値が増えてるのか（この場合pos）減ってるのか(この場合nega)を見極める．
 *   最後，原点に当てた状態でkey board入力すると，"./encCalib"のwhile loopを抜けて，その時の値と引数としてセットした<Direction>が値として保存される．
-*   保存される.csvは，
-    
-    ./<Board Name> + str (_.csv)
-    
-    となる
+*   保存される.csvは，`./<Board Name> + str (_.csv)` となる
 
 
